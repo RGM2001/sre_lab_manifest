@@ -1,5 +1,5 @@
 namespace: dev
 resources:
-  - ../../base # Ссылаемся на базовые файлы
-  - ../../dev/ingress.yaml # Берем твой старый ингресс из старой папки dev
-  - ../../dev/quota.yaml   # Берем квоту
+  - ../../base
+  - ingress.yaml
+  - quota.yaml

@@ -27,6 +27,12 @@ spec:
               - bot_token: "8788027908:AAEN-AitM_G2ekMx7bq1pnLddHRduVD78rs"
                 chat_id: 1757719813
                 message: "🚨 АЛЕРТ! Инфраструктура полностью переведена на GitOps! 🚨"
+        grafana:
+          additionalDataSources:
+            - name: Loki
+              type: loki
+              url: http://loki-stack.monitoring.svc:3100
+              access: proxy
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring

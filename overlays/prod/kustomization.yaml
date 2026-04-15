@@ -1,0 +1,8 @@
+namespace: prod
+resources:
+  - ../../base
+  - ingress.yaml
+# А вот тут магия Kustomize: переопределяем количество подов без изменения самого Deployment
+replicas:
+  - name: web-app
+    count: 3

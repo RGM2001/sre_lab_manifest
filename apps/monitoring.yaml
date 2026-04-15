@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-stack
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 58.2.2
+    helm:
+      values: |
+        alertmanager:
+          config:
+            global:
+              resolve_timeout: 5m
+            route:
+              group_by: ['namespace', 'alertname']
+              group_wait: 10s
+              group_interval: 1m
+              repeat_interval: 1h
+              receiver: 'telegram-bot'
+            receivers:
+            - name: 'telegram-bot'
+              telegram_configs:
+              - bot_token: "8788027908:AAEN-AitM_G2ekMx7bq1pnLddHRduVD78rs"
+                chat_id: 1757719813
+                message: "🚨 АЛЕРТ! Инфраструктура полностью переведена на GitOps! 🚨"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

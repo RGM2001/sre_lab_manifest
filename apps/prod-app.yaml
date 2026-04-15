@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/ТВОЙ_ЛОГИН/sre-stand-manifests.git'
+    repoURL: 'https://github.com/RGM2001/sre-stand-manifests.git'
     targetRevision: main
     path: overlays/prod
   destination:
